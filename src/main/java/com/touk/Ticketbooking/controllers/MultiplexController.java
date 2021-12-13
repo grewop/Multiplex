@@ -5,16 +5,15 @@ import com.touk.Ticketbooking.model.Screening;
 import com.touk.Ticketbooking.services.MultiplexService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 @RestController()
+@RequestMapping("/Multiplex")
+
 public class MultiplexController {
     private final MultiplexService multiplexService;
 
@@ -63,8 +62,9 @@ public class MultiplexController {
             value = "/reservation/{title}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void postMovie() {
-
+    public void postMovie(@RequestBody Movie movie ) {
+        Movie movieToAdd = new Movie(movie.getTitle(), movie.getMovieScreeningTime(), movie.getScreening());
+        multiplexService.addMovie(movieToAdd);
     }
     //dodaj rezerwacje
     @PostMapping(

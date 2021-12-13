@@ -19,4 +19,10 @@ public class Movie {
     private String movieScreeningTime;
     @ManyToOne
     private Screening screening;
+
+    public Movie(String title, String movieScreeningTime, Screening screening) {
+        this.title = title;
+        this.movieScreeningTime = movieScreeningTime;
+        this.screening = screening;
+    }
 }

@@ -41,4 +41,7 @@ public class MultiplexService {
         screeningRepository.findByMoviesList(movieID).forEach(movie::add);
         return movie;
     }
+    public void addMovie(Movie movie){
+        this.movieRepository.save(movie);
+    }
 }
