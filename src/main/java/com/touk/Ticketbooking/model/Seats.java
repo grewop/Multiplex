@@ -1,5 +1,6 @@
 package com.touk.Ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +18,11 @@ public class Seats {
     private long id;
     @NotNull
     private int seatNumber;
+
     @ManyToOne
-    @JoinColumn(name="room_id")
-    private Room room;
+    @JoinColumn(name="rooms_id")
+    @JsonIgnoreProperties(value = {"SEATS"})
+    private Room rooms;
 
 
 }

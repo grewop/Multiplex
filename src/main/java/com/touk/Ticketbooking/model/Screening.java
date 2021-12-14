@@ -1,12 +1,12 @@
 package com.touk.Ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Table(name = "SCREENING")
@@ -22,11 +22,15 @@ public class Screening {
 
     @Column(name = "SCREENING_HOUR")
     private LocalTime screeningHour;
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="MOVIES_ID")
-    private List<Movie> movies;
 
     @ManyToOne
+    @JoinColumn(name="movie_id")
+    @JsonIgnoreProperties(value = {"SCREENING"})
+    private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name="rooms_id")
+    @JsonIgnoreProperties(value = {"SCREENING"})
     private Room rooms;
 
 

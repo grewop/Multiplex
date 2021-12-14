@@ -59,12 +59,11 @@ public class MultiplexController {
     }
     //dodaj film
     @PostMapping(
-            value = "/reservation/{title}",
+            value = "/movie",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void postMovie(@RequestBody Movie movie ) {
-        Movie movieToAdd = new Movie(movie.getTitle(), movie.getMovieScreeningTime(), movie.getScreening());
-        multiplexService.addMovie(movieToAdd);
+    public void postMovie(@RequestBody  Movie movie) {
+        multiplexService.addMovie(movie);
     }
     //dodaj rezerwacje
     @PostMapping(

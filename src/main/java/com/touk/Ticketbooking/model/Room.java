@@ -1,5 +1,6 @@
 package com.touk.Ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,12 +23,12 @@ import static javax.persistence.GenerationType.IDENTITY;
         private String roomName;
         @NotNull
         private int numberOfSeats;
-        @OneToMany( targetEntity = Screening.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @JoinColumn(name="SCREENING_ID")
+        @OneToMany(mappedBy = "rooms")
+        @JsonIgnoreProperties(value = {"rooms"})
         private List<Screening> screenings ;
 
-        @OneToMany( targetEntity = Seats.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @JoinColumn(name="SEAT_ID")
+        @OneToMany(mappedBy = "rooms")
+        @JsonIgnoreProperties(value = {"rooms"})
         private List<Seats> seats ;
 
 

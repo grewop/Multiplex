@@ -12,7 +12,6 @@ import java.util.List;
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
 
     List<Movie> findByTitle (@Param("title") String title);
-    List<Movie> findByidm (@Param("idm") int idm);
     @Query(value = "SELECT * FROM MOVIES WHERE SCREENING_TIMES = :screeningTimes", nativeQuery = true)
     List<Movie> findByscreeningTimes (@Param("screeningTimes") String screeningTimes);
 }

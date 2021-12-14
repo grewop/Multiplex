@@ -1,9 +1,11 @@
 package com.touk.Ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "MOVIES")
@@ -11,18 +13,24 @@ import javax.persistence.*;
 @Setter
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idm;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "movie_screening_time")
-    private String movieScreeningTime;
-    @ManyToOne
-    private Screening screening;
+    @OneToMany(mappedBy = "movie")
+    @JsonIgnoreProperties(value = {"movie"})
+    private List<Screening> screening;
 
-    public Movie(String title, String movieScreeningTime, Screening screening) {
+    public Movie() {
+    }
+
+    public Movie(String title) {
         this.title = title;
-        this.movieScreeningTime = movieScreeningTime;
+    }
+
+    public Movie(long id, String title, String movieScreeningTime, List<Screening> screening) {
+        this.id = id;
+        this.title = title;
         this.screening = screening;
     }
 }
