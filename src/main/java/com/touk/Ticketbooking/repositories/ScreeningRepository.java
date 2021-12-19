@@ -12,13 +12,12 @@ import java.util.List;
 
 
 @Repository
-public interface ScreeningRepository  extends PagingAndSortingRepository<Screening, Long>
-
-{
+public interface ScreeningRepository extends PagingAndSortingRepository<Screening, Long> {
     //List<Screening> findByids (@Param("ids") int ids
     @Query(value = "SELECT * FROM SCREENING WHERE ids = :moviesList", nativeQuery = true)
-    List<Screening> findByMoviesList (@Param("moviesList") int moviesList);
-    @Query(value = "SELECT * FROM SCREENING WHERE SCREENING_TIMES = :screeningTimes AND screeningHour = :hour", nativeQuery = true)
-    List<Screening> findByscreeningTimes (@Param("screeningTimes") LocalDate screeningTimes, @Param("hour") LocalTime screeningHour);
+    List<Screening> findByMoviesList(@Param("moviesList") int moviesList);
+
+    @Query(value = "SELECT * FROM SCREENING WHERE SCREENING_DATE = :screeningDate AND SCREENING_TIME = :hour", nativeQuery = true)
+    List<Screening> findByscreeningTimes(@Param("screeningDate") LocalDate screeningTimes, @Param("hour") LocalTime screeningHour);
 
 }

@@ -17,7 +17,7 @@ public class Movie {
     private long id;
     @Column(name = "title")
     private String title;
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"movie"})
     private List<Screening> screening;
 
